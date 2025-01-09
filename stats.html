@@ -1,0 +1,33 @@
+<html lang="en">
+  <head>
+    <title>Bitcoin Core contributions</title>
+  </head>
+  <body style="font-family:arial;font-size:13px;">
+
+  <h1>{{ stats['contributor'] }}</h1>
+  
+  <p>In {{ stats['year'] }}...</p>
+  <ul>
+    <li>... you opened <a href='https://github.com/bitcoin/bitcoin/pulls?utf8=%E2%9C%93&q=is%3Apr+author%3A{{ stats['contributor'] }}'><b>{{ stats['prs_opened'] }} PRs</b></a>.</li>
+    <li>... your favorite components were:
+    <ol>
+{% for component in stats['components'] %}      <li><a href= 'https://github.com/bitcoin/bitcoin/pulls?utf8=%E2%9C%93&q=is%3Apr+author%3A{{ stats['contributor'] }}+label%3A"{{ component[0] }}"'>{{ component[0] }} ({{ component[1] }} Pull Requests)</a></li>
+{% endfor %}    </ol></li>
+    <li/>... you had <a
+    href='https://github.com/bitcoin/bitcoin/pulls?utf8=%E2%9C%93&q=is%3Apr+author%3A{{
+    stats['contributor'] }}+is%3Amerged'><b>{{ stats['prs_merged'] }}
+    PRs</b></a> (including <b>{{ stats['commits'] }} commits</b>) merged and
+    <b>{{ stats['prs_closed'] }} PRs</b> closed</li>
+    <li>... your most popular PRs (by review comments) were
+    <ol>
+{% for pr in stats['popular_prs'] %}      <li><a href="https://github.com/bitcoin/bitcoin/pull/{{ pr['number'] }}">#{{ pr['number'] }} - {{ pr['title']}} ({{ pr['comments']+pr['review_comments'] }} comments)</a></li>
+{% endfor %}    </ol></li>
+    <li>... you made <b>{{ stats['comments'] }}</b> review comments, with <b>{{ stats['comments_others'] }}</b>
+    comments on other authors' PRs</li>
+    <li>... your most commented on others' PRs were
+      <ol>
+  {% for pr in stats['prs_others'] %}   <li><a href="https://github.com/bitcoin/bitcoin/pull/{{ pr['number'] }}">#{{ pr['number'] }} - {{ pr['title'] }} ({{ pr['count'] }} comments)</a></li>
+  {% endfor %}    </ol></li>
+  </ul>
+</body>
+</html>
